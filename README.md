@@ -3,7 +3,7 @@
 
 A working prototype that ingests a folder of files and automatically triages them so an
 investigator examines the most suspicious evidence first, while preserving evidentiary
-integrity. Built as a Master's final project (Team 9: Immanuel Robin & Madhu Purnima).
+integrity.
 
 The pipeline is **rule-based and transparent** — every decision is explainable, and no
 training data is required. That is a deliberate design choice: it removes the
@@ -11,7 +11,7 @@ training data is required. That is a deliberate design choice: it removes the
 
 ---
 
-## 1. What makes this stand out (A+ features)
+## 1. What makes this stand out
 
 - **Five integrated layers** with a clean per-layer contract (see Section 6).
 - **Three named scores** that mirror the project design:
@@ -30,15 +30,6 @@ training data is required. That is a deliberate design choice: it removes the
 - **Auto-generated PDF forensic report**, a **command-line interface**, a single
   **config file** for all weights/thresholds, and **unit tests** (pytest).
 
-### How it maps to your slides
-
-| Slide layer | Module |
-|---|---|
-| Layer 1: Acquisition | `acquisition.py` |
-| Layer 2: Processing | `processing.py` |
-| Layer 3: Anti-Forensic Detection | `antiforensics.py` |
-| Layer 4: Intelligence Engine (DFI / Integrity / Relevance) | `intelligence.py` |
-| Layer 5: Visualization | `dashboard.py` |
 
 ### Industry-standards alignment
 - **Evidence metadata** follows the `EvidenceItemInformation` schema: FileName, FilePath,
@@ -93,7 +84,7 @@ requirements.txt     Python dependencies
 
 ## 3. Install (Kali Linux)
 
-Both team machines are on Kali. Install `libmagic`, the Python packages, and the
+Install `libmagic`, the Python packages, and the
 Sleuth Kit + ewf-tools needed to read CFReDS disk images:
 
 ```bash
@@ -152,13 +143,13 @@ location, description) and the Evidence Source fields; both appear in the PDF re
 
 ---
 
-## 5. Datasets and evaluation (the part examiners reward)
+## 5. Datasets and evaluation
 
-You use three complementary data sources, matching your proposal: **synthetic
+We use three complementary data sources, matching our proposal: **synthetic
 artifacts** (controlled, labeled), **Govdocs1** (real-world scale), and **CFReDS**
 (real forensic disk images).
 
-### 5.1 Synthetic forensic artifacts (start here)
+### 5.1 Synthetic forensic artifacts 
 A self-contained, labeled set that deliberately triggers every detection rule
 (spoofing, double extension, hidden file, high entropy, future timestamp).
 
@@ -168,7 +159,7 @@ python pipeline.py scan synthetic_evidence --case SYNTH01 --examiner "M. Purnima
 ```
 `synthetic_evidence_manifest.csv` lists the expected verdict for each file, so you can
 show predicted vs expected in the demo. This satisfies the "synthetic forensic
-artifacts" element of the proposal and is the safest thing to demo live.
+artifacts" element of the proposal.
 
 ### 5.2 Get a real corpus — Govdocs1
 ~1 million real, freely-redistributable files crawled from `.gov` domains.
@@ -197,7 +188,7 @@ python benchmark.py govdocs/000 --out benchmark --spoof-rate 0.5 --limit 2000
 python evaluate.py --benchmark benchmark
 ```
 `evaluate.py` prints a confusion matrix and precision/recall/F1/accuracy and writes
-`metrics.json`. Put that table straight into your results chapter.
+`metrics.json`. 
 
 ### 5.4 CFReDS — real forensic disk images (required by your proposal)
 CFReDS ships **disk images**, not loose files, so there is one extra step: extract the
@@ -272,19 +263,8 @@ PYTHONPATH=. pytest -q
 
 ---
 
-## 8. Suggested talk track for the July 20 review
 
-1. The problem: evidence backlog + R. v. Jordan time limits (30 sec).
-2. Live demo: `scan` the known-answer set, open the dashboard, show a spoofed file at
-   the top with its reasons.
-3. Show the `evaluate.py` output on a Govdocs1 benchmark (confusion matrix + F1).
-4. Show `verify-audit` catching a tampered record (the integrity story).
-5. Close with the three scores and why rule-based is the right v1 choice; ML as future
-   work.
-
----
-
-## 9. Future work (write these up — they show scope awareness)
+## 8. Future work 
 - ML-based scoring once labeled operational data exists.
 - Carving and parsing *deleted/unallocated* artifacts more deeply (the `--all` flag
   already recovers them; richer analysis is the next step).
