@@ -178,7 +178,7 @@ curl -O https://downloads.digitalcorpora.org/corpora/files/govdocs1/zipfiles/000
 unzip 000.zip && cd ..
 ```
 
-### 5.3 Build a LABELED benchmark from Govdocs1 (ground truth for free)
+### 5.3 Build a LABELED benchmark from Govdocs1 
 Real malicious "spoofed" files with labels are hard to obtain, so we manufacture them:
 take real files and rename a known fraction to the *wrong* extension. The renamed ones
 are labeled spoofed (1), the rest clean (0). This yields perfect ground truth.
@@ -190,7 +190,7 @@ python evaluate.py --benchmark benchmark
 `evaluate.py` prints a confusion matrix and precision/recall/F1/accuracy and writes
 `metrics.json`. 
 
-### 5.4 CFReDS — real forensic disk images (required by your proposal)
+### 5.4 CFReDS — real forensic disk images 
 CFReDS ships **disk images**, not loose files, so there is one extra step: extract the
 files, then scan them. `ingest_image.py` does both. On Kali, The Sleuth Kit reads `.E01`
 images **directly** — no `ewfmount`, no FUSE, no `/mnt` mountpoint.
