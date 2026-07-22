@@ -1,5 +1,4 @@
-# ForenSight 
-## Scalable Digital Forensic Triage Framework
+# ForenSight — Scalable Digital Forensic Triage Framework
 
 A working prototype that ingests a folder of files and automatically triages them so an
 investigator examines the most suspicious evidence first, while preserving evidentiary
@@ -290,4 +289,3 @@ PYTHONPATH=. pytest -q
   already recovers them; richer analysis is the next step).
 - Full timeline reconstruction across artifacts; mobile and cloud acquisition.
 - NSRL full hash-set integration for large-scale known-file filtering.
-

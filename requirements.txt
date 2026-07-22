@@ -1,0 +1,6 @@
+python-magic
+streamlit
+pandas
+reportlab
+pytest
+altair
