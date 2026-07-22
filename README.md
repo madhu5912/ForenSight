@@ -1,4 +1,5 @@
-# ForenSight — Scalable Digital Forensic Triage Framework
+# ForenSight
+## Scalable Digital Forensic Triage Framework
 
 A working prototype that ingests a folder of files and automatically triages them so an
 investigator examines the most suspicious evidence first, while preserving evidentiary
