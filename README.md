@@ -1,10 +1,11 @@
-Licensed under the GNU General Public License v3.0 (GPLv3) — see LICENSE for details.
 # ForenSight
 ## Scalable Digital Forensic Triage Framework
 
 A working prototype that ingests a folder of files and automatically triages them so an
 investigator examines the most suspicious evidence first, while preserving evidentiary
 integrity.
+
+Licensed under the GNU General Public License v3.0 (GPLv3) — see LICENSE for details.
 
 The pipeline is **rule-based and transparent** — every decision is explainable, and no
 training data is required.
