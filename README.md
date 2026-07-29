@@ -154,7 +154,7 @@ A self-contained, labeled set that deliberately triggers every detection rule
 
 ```bash
 python synthetic_artifacts.py --out synthetic_evidence
-python pipeline.py scan synthetic_evidence --case SYNTH01 --examiner "M. Purnima"
+python pipeline.py scan synthetic_evidence --case SYNTH01 --examiner "Purnima"
 ```
 `synthetic_evidence_manifest.csv` lists the expected verdict for each file, which
 shows predicted vs expected.
