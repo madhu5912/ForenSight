@@ -6,8 +6,7 @@ investigator examines the most suspicious evidence first, while preserving evide
 integrity.
 
 The pipeline is **rule-based and transparent** — every decision is explainable, and no
-training data is required. That is a deliberate design choice: it removes the
-"no real-world data to train a model" risk and produces results you can defend.
+training data is required.
 
 ---
 
@@ -110,9 +109,9 @@ ingestion, however, expects the Kali forensic tools above.)
 
 ```bash
 python make_test_data.py                                   # create known-answer files
-python pipeline.py scan sample_evidence --case CASE001 --examiner "I. Robin"
+python pipeline.py scan sample_evidence --case CASE001 --examiner "Robin"
 streamlit run dashboard.py                                 # open the dashboard
-python report.py --case CASE001 --examiner "M. Purnima"    # PDF report
+python report.py --case CASE001 --examiner "madhu"    # PDF report
 python pipeline.py verify --case CASE001 --root sample_evidence   # detect changed files
 python pipeline.py verify-audit                            # custody check
 ```
@@ -133,9 +132,9 @@ Expected from the scan: `disguised.jpg`, `secret.pdf` and `invoice.pdf.exe` are 
 ```bash
 python pipeline.py case-init --case CASE001          # creates case_CASE001.json to edit
 python pipeline.py custody-log --case CASE001 --purpose "Imaging" \
-    --method "write-blocker" --released-by "Officer A" --received-by "I. Robin" \
+    --method "write-blocker" --released-by "Officer A" --received-by "Robin" \
     --hash "<sha256>"                                 # appends a custody entry
-python report.py --case CASE001 --examiner "I. Robin"   # timestamped PDF (never overwrites)
+python report.py --case CASE001 --examiner "Robin"   # timestamped PDF (never overwrites)
 python export_xml.py --case CASE001                   # schema-conformant XML
 ```
 Edit `case_CASE001.json` to fill in the Chain of Custody (date, seized-from/by, reason,
@@ -157,9 +156,8 @@ A self-contained, labeled set that deliberately triggers every detection rule
 python synthetic_artifacts.py --out synthetic_evidence
 python pipeline.py scan synthetic_evidence --case SYNTH01 --examiner "M. Purnima"
 ```
-`synthetic_evidence_manifest.csv` lists the expected verdict for each file, so you can
-show predicted vs expected in the demo. This satisfies the "synthetic forensic
-artifacts" element of the proposal.
+`synthetic_evidence_manifest.csv` lists the expected verdict for each file, which
+shows predicted vs expected.
 
 ### 5.2 Get a real corpus — Govdocs1
 ~1 million real, freely-redistributable files crawled from `.gov` domains.
@@ -202,7 +200,7 @@ original filename, which would otherwise break the shell):
 ```bash
 wget -O rm1.E01 "https://cfreds-archive.nist.gov/data_leakage_case/images/rm%231/cfreds_2015_data_leakage_rm%231.E01"
 ls -lh rm1.E01                       # confirm the file is actually here
-python ingest_image.py rm1.E01 --case LEAK_RM1 --examiner "I. Robin"
+python ingest_image.py rm1.E01 --case LEAK_RM1 --examiner "Robin"
 ```
 
 Richer alternatives from the same case page
@@ -210,7 +208,7 @@ Richer alternatives from the same case page
 - Removable Media #2 (the suspect's USB, more leaked files): `rm#2` DD `.7z` (~219 MB)
   or E01 (~243 MB).
 - Full PC image (20 GB, NTFS): `pc.E01`..`pc.E04` (~7 GB) — only if you want the full
-  Windows system; too big for a quick demo.
+  Windows system.
 
 Add `--all` to also recover deleted/unallocated files:
 ```bash
@@ -218,19 +216,14 @@ python ingest_image.py rm1.E01 --case LEAK_RM1 --all
 ```
 
 > If `ls` shows the file but ingestion reports "Image file not found", you typed a
-> different name than the file actually has — copy it exactly from `ls`. The earlier
-> `ewfmount` errors were just that: the placeholder names `evidence.dd` / `image.E01`
-> didn't exist. With `tsk_recover` reading E01 directly, you no longer need `ewfmount`
-> at all.
+> different name than the file actually has — copy it exactly from `ls`.
 
 ### 5.5 NapierOne (optional)
 A modern mixed-type set (500k+ files, 44 types) on AWS Open Data
-(https://registry.opendata.aws/tag/digital-forensics/), useful as a future-work mention.
+(https://registry.opendata.aws/tag/digital-forensics/), useful as a future-work.
 
-> **Honesty note for your report:** on controlled synthetic files you will see very high
-> scores. On raw Govdocs1 / CFReDS expect a few files `libmagic` cannot type and the odd
-> edge case — *report those real numbers and discuss them.* A short "limitations and
-> false positives" paragraph reads as more rigorous than a naive "100% accuracy" claim.
+> **Honesty note:** on controlled synthetic files we will see very high
+> scores. On raw Govdocs1 / CFReDS expect a few files `libmagic` cannot type
 
 ---
 
