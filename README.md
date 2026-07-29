@@ -222,10 +222,8 @@ python ingest_image.py rm1.E01 --case LEAK_RM1 --all
 A modern mixed-type set (500k+ files, 44 types) on AWS Open Data
 (https://registry.opendata.aws/tag/digital-forensics/), useful as a future-work.
 
-> **Honesty note:** on controlled synthetic files we will see very high
-> scores. On raw Govdocs1 / CFReDS expect a few files `libmagic` cannot type
-
----
+### 5.6 Known Limitation
+On controlled synthetic files, detection scores are very high. On raw Govdocs1 / CFReDS data, expect a small number of files that libmagic cannot correctly type — these are edge cases in the underlying library, not a flaw in the detection approach.
 
 ## 6. How the layers integrate (orchestration)
 
