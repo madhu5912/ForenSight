@@ -247,10 +247,12 @@ That single rule is why the orchestrator is trivial and the design is safe to ex
 ---
 
 ## 7. Tests
-13 unit tests cover acquisition, entropy scoring, anti-forensic detection, and integrity re-verification.
+
 ```bash
+13 unit tests cover acquisition, entropy scoring, anti-forensic detection, and integrity re-verification.
 PYTHONPATH=. pytest -q
 ```
+
 
 ---
 
