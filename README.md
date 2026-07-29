@@ -118,6 +118,12 @@ python pipeline.py verify-audit                            # custody check
 Expected from the scan: `disguised.jpg`, `secret.pdf` and `invoice.pdf.exe` are flagged
 **High**; `clean_image.png` stays **Low**.
 
+### Sample Output
+[+] Scan complete: 12 files processed
+[HIGH]   disguised.jpg      (DFI=70, spoofed extension)
+[HIGH]   invoice.pdf.exe    (DFI=100, double extension + spoof)
+[LOW]    clean_image.png    (DFI=0)
+
 ### What the dashboard does
 - **Scan a folder** straight from the UI (top expander) — type a path, click *Run scan*.
 - **Click a file → pop-up** with its scores, metadata, a content preview, a **live hash
