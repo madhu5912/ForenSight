@@ -120,7 +120,7 @@ Expected from the scan: `disguised.jpg`, `secret.pdf` and `invoice.pdf.exe` are 
 **High**; `clean_image.png` stays **Low**.
 
 ### Sample Output
->sample output:
+> sample output:
 > [+] Scan complete: 12 files processed  
 > [HIGH] disguised.jpg (DFI=70, spoofed extension)  
 > [HIGH] invoice.pdf.exe (DFI=100, double extension + spoof)  
